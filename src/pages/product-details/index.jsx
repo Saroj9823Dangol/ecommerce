@@ -315,7 +315,7 @@ const ProductDetails = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="min-h-screen bg-background flex items-center justify-center pt-[4rem]">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="font-coder text-muted-foreground">
@@ -330,7 +330,7 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-[4rem]">
         {/* Breadcrumb */}
         <div className="bg-secondary/30 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

@@ -71,7 +71,7 @@ const HeroSection = () => {
   const isLightSlide = currentSlide === 1;
 
   return (
-    <section className="relative h-[70vh] lg:h-[80vh] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+    <section className="relative h-[90vh] lg:h-[85vh] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
       {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 transition-transform duration-1000 ease-in-out">
         <Image

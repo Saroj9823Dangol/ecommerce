@@ -82,7 +82,9 @@ const CheckoutProcess = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <OrderConfirmation orderData={orderData} />
+        <div className="pt-[4rem]">
+          <OrderConfirmation orderData={orderData} />
+        </div>
       </div>
     );
   }
@@ -91,103 +93,105 @@ const CheckoutProcess = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Progress Indicator */}
-      <CheckoutProgress
-        currentStep={currentStep}
-        completedSteps={completedSteps}
-        onStepClick={handleStepClick}
-      />
+      <div className="pt-[4rem]">
+        {/* Progress Indicator */}
+        <CheckoutProgress
+          currentStep={currentStep}
+          completedSteps={completedSteps}
+          onStepClick={handleStepClick}
+        />
 
-      <div className="relative">
-        {/* Mobile Order Summary Toggle */}
-        <div className="lg:hidden sticky top-16 z-10 p-4 bg-background border-b border-border">
-          <OrderSummary
-            isCollapsed={isOrderSummaryCollapsed}
-            onToggle={() =>
-              setIsOrderSummaryCollapsed(!isOrderSummaryCollapsed)
-            }
-          />
-        </div>
-
-        <div className="flex">
-          {/* Main Content */}
-          <div className="flex-1 lg:pr-8">
-            {currentStep === 1 && (
-              <ShippingStep
-                onNext={handleShippingNext}
-                shippingData={shippingData}
-                setShippingData={setShippingData}
-              />
-            )}
-
-            {currentStep === 2 && (
-              <PaymentStep
-                onNext={handlePaymentNext}
-                onBack={handlePaymentBack}
-                paymentData={paymentData}
-                setPaymentData={setPaymentData}
-              />
-            )}
-
-            {currentStep === 3 && (
-              <ReviewStep
-                onBack={handleReviewBack}
-                onComplete={handleOrderComplete}
-                shippingData={shippingData}
-                paymentData={paymentData}
-                orderSummary={
-                  <OrderSummary isCollapsed={false} onToggle={() => {}} />
-                }
-              />
-            )}
+        <div className="relative">
+          {/* Mobile Order Summary Toggle */}
+          <div className="lg:hidden sticky top-16 z-10 p-4 bg-background border-b border-border">
+            <OrderSummary
+              isCollapsed={isOrderSummaryCollapsed}
+              onToggle={() =>
+                setIsOrderSummaryCollapsed(!isOrderSummaryCollapsed)
+              }
+            />
           </div>
 
-          {/* Desktop Order Summary Sidebar */}
-          <div className="hidden lg:block w-96 sticky top-16 h-fit">
-            <div className="p-6">
-              <OrderSummary isCollapsed={false} onToggle={() => {}} />
+          <div className="flex">
+            {/* Main Content */}
+            <div className="flex-1 lg:pr-8">
+              {currentStep === 1 && (
+                <ShippingStep
+                  onNext={handleShippingNext}
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                />
+              )}
+
+              {currentStep === 2 && (
+                <PaymentStep
+                  onNext={handlePaymentNext}
+                  onBack={handlePaymentBack}
+                  paymentData={paymentData}
+                  setPaymentData={setPaymentData}
+                />
+              )}
+
+              {currentStep === 3 && (
+                <ReviewStep
+                  onBack={handleReviewBack}
+                  onComplete={handleOrderComplete}
+                  shippingData={shippingData}
+                  paymentData={paymentData}
+                  orderSummary={
+                    <OrderSummary isCollapsed={false} onToggle={() => {}} />
+                  }
+                />
+              )}
+            </div>
+
+            {/* Desktop Order Summary Sidebar */}
+            <div className="hidden lg:block w-96 sticky top-16 h-fit">
+              <div className="p-6">
+                <OrderSummary isCollapsed={false} onToggle={() => {}} />
+              </div>
             </div>
           </div>
+
+          {/* Mobile Order Summary Expanded */}
+          {!isOrderSummaryCollapsed && (
+            <div className="lg:hidden fixed inset-0 top-16 bg-background z-20 overflow-y-auto">
+              <div className="p-4">
+                <OrderSummary
+                  isCollapsed={false}
+                  onToggle={() => setIsOrderSummaryCollapsed(true)}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Mobile Order Summary Expanded */}
-        {!isOrderSummaryCollapsed && (
-          <div className="lg:hidden fixed inset-0 top-16 bg-background z-20 overflow-y-auto">
-            <div className="p-4">
-              <OrderSummary
-                isCollapsed={false}
-                onToggle={() => setIsOrderSummaryCollapsed(true)}
-              />
+        {/* Guest Checkout Banner */}
+        {currentStep === 1 && (
+          <div className="bg-secondary border-t border-border">
+            <div className="max-w-4xl mx-auto p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-bold">!</span>
+                  </div>
+                  <div>
+                    <p className="font-coder font-medium text-foreground">
+                      Shopping as a guest?
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Create an account to track orders and save addresses
+                    </p>
+                  </div>
+                </div>
+                <button className="text-primary font-coder font-medium text-sm hover:underline">
+                  Create Account
+                </button>
+              </div>
             </div>
           </div>
         )}
       </div>
-
-      {/* Guest Checkout Banner */}
-      {currentStep === 1 && (
-        <div className="bg-secondary border-t border-border">
-          <div className="max-w-4xl mx-auto p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">!</span>
-                </div>
-                <div>
-                  <p className="font-coder font-medium text-foreground">
-                    Shopping as a guest?
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Create an account to track orders and save addresses
-                  </p>
-                </div>
-              </div>
-              <button className="text-primary font-coder font-medium text-sm hover:underline">
-                Create Account
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

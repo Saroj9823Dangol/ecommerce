@@ -76,7 +76,7 @@ const UserDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <div className="container mx-auto px-4 lg:px-8 py-8">
+      <div className="container mx-auto px-4 lg:px-8 pt-[4rem]">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-monument font-bold text-gray-900 mb-2">

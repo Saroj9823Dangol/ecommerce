@@ -460,7 +460,7 @@ const ProductCatalog = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8 font-coder">
+      <main className="container mx-auto px-4 py-8 font-coder pt-[4rem]">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="font-monument font-bold text-3xl lg:text-4xl text-foreground mb-2">
