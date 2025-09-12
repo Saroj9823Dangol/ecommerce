@@ -12,85 +12,9 @@ const Header = () => {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(3);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [activeSubcategory, setActiveSubcategory] = useState(null);
   const [wishlistCount, setWishlistCount] = useState(5);
 
   const location = useLocation();
-  const searchRef = useRef(null);
-  const userMenuRef = useRef(null);
-  const miniCartRef = useRef(null);
-  const categoryMenuRef = useRef(null);
-
-  const categories = {
-    Men: {
-      featured: [
-        { name: "New Arrivals", href: "/men/new-arrivals" },
-        { name: "Best Sellers", href: "/men/best-sellers" },
-        { name: "Sale", href: "/men/sale" },
-      ],
-      shoes: [
-        { name: "Running", href: "/men/shoes/running" },
-        { name: "Basketball", href: "/men/shoes/basketball" },
-        { name: "Sneakers", href: "/men/shoes/sneakers" },
-      ],
-      clothing: [
-        { name: "T-Shirts", href: "/men/clothing/t-shirts" },
-        { name: "Hoodies", href: "/men/clothing/hoodies" },
-        { name: "Pants", href: "/men/clothing/pants" },
-      ],
-    },
-    Women: {
-      featured: [
-        { name: "New Arrivals", href: "/women/new-arrivals" },
-        { name: "Best Sellers", href: "/women/best-sellers" },
-        { name: "Sale", href: "/women/sale" },
-      ],
-      shoes: [
-        { name: "Running", href: "/women/shoes/running" },
-        { name: "Training", href: "/women/shoes/training" },
-        { name: "Sneakers", href: "/women/shoes/sneakers" },
-      ],
-      clothing: [
-        { name: "Sports Bras", href: "/women/clothing/sports-bras" },
-        { name: "Leggings", href: "/women/clothing/leggings" },
-        { name: "Tops", href: "/women/clothing/tops" },
-      ],
-    },
-    Kids: {
-      featured: [
-        { name: "New Arrivals", href: "/kids/new-arrivals" },
-        { name: "Best Sellers", href: "/kids/best-sellers" },
-        { name: "Sale", href: "/kids/sale" },
-      ],
-      boys: [
-        { name: "Shoes", href: "/kids/boys/shoes" },
-        { name: "Clothing", href: "/kids/boys/clothing" },
-        { name: "Accessories", href: "/kids/boys/accessories" },
-      ],
-      girls: [
-        { name: "Shoes", href: "/kids/girls/shoes" },
-        { name: "Clothing", href: "/kids/girls/clothing" },
-        { name: "Accessories", href: "/kids/girls/accessories" },
-      ],
-    },
-    Home: {
-      featured: [
-        { name: "New Arrivals", href: "/home/new-arrivals" },
-        { name: "Best Sellers", href: "/home/best-sellers" },
-      ],
-      categories: [
-        { name: "Furniture", href: "/home/furniture" },
-        { name: "Decor", href: "/home/decor" },
-        { name: "Lighting", href: "/home/lighting" },
-      ],
-      rooms: [
-        { name: "Living Room", href: "/home/rooms/living" },
-        { name: "Bedroom", href: "/home/rooms/bedroom" },
-        { name: "Office", href: "/home/rooms/office" },
-      ],
-    },
-  };
 
   const navigationItems = ["Men", "Women", "Kids", "Home"];
 
@@ -101,61 +25,6 @@ const Header = () => {
     "Superstar",
     "NMD R1",
   ];
-
-  const mockCartItems = [
-    {
-      id: 1,
-      name: "Ultraboost 22",
-      price: 180,
-      image: "/assets/images/no_image.png",
-      size: "US 9",
-    },
-    {
-      id: 2,
-      name: "Stan Smith",
-      price: 100,
-      image: "/assets/images/no_image.png",
-      size: "US 10",
-    },
-    {
-      id: 3,
-      name: "Gazelle",
-      price: 90,
-      image: "/assets/images/no_image.png",
-      size: "US 8.5",
-    },
-  ];
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef?.current && !searchRef?.current?.contains(event?.target)) {
-        setIsSearchOpen(false);
-        setSearchSuggestions([]);
-      }
-      if (
-        userMenuRef?.current &&
-        !userMenuRef?.current?.contains(event?.target)
-      ) {
-        setIsUserMenuOpen(false);
-      }
-      if (
-        miniCartRef?.current &&
-        !miniCartRef?.current?.contains(event?.target)
-      ) {
-        setIsMiniCartOpen(false);
-      }
-      if (
-        categoryMenuRef?.current &&
-        !categoryMenuRef?.current?.contains(event?.target)
-      ) {
-        setHoveredCategory(null);
-        setActiveSubcategory(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleSearchChange = (e) => {
     const value = e?.target?.value;
@@ -211,96 +80,22 @@ const Header = () => {
     return location?.pathname === path;
   };
 
-  const styles = `
-    .category-dropdown {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
-    }
-    
-    .category-nav:hover .category-dropdown,
-    .category-nav:focus-within .category-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    
-    .subcategory-menu {
-      display: none;
-    }
-    
-    .subcategory-trigger:hover + .subcategory-menu,
-    .subcategory-menu:hover {
-      display: block;
-    }
-  `;
-
   return (
     <>
-      <style>{styles}</style>
       {/* Main Header with Subtle Pattern */}
       <header className="fixed top-0 left-0 right-0 bg-white/0 backdrop-blur-sm z-[1000] h-[5rem] flex items-center">
-        {/* Subtle diagonal pattern */}
-        <div
-          className="absolute inset-0 opacity-5 bg-transparent"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, var(--color-accent) 10%, transparent 10%, transparent 50%, var(--color-accent) 50%, var(--color-accent) 60%, transparent 60%, transparent 100%)",
-            backgroundSize: "8px 8px",
-          }}
-        ></div>
-
         <div className="relative container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Left Side - Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navigationItems.map((category) => (
-                <div
-                  key={category}
-                  className="category-nav relative"
-                  onMouseEnter={() => setHoveredCategory(category)}
-                  onMouseLeave={() => setHoveredCategory(null)}
-                >
+                <div key={category} className="category-nav relative">
                   <Link
                     to={`/${category.toLowerCase()}`}
                     className="text-sm font-bold text-accent transition-colors uppercase tracking-wider relative group"
                   >
                     {category}
                   </Link>
-
-                  {/* Full-width Dropdown */}
-                  {hoveredCategory === category && (
-                    <div className="category-dropdown absolute left-0 right-0 top-full pt-2">
-                      <div className="bg-white shadow-xl border-t border-gray-100">
-                        <div className="container mx-auto px-4 py-8">
-                          <div className="grid grid-cols-4 gap-8">
-                            {Object.entries(categories[category]).map(
-                              ([section, items]) => (
-                                <div key={section} className="relative">
-                                  <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">
-                                    {section}
-                                  </h3>
-                                  <ul className="space-y-3">
-                                    {items.map((item, index) => (
-                                      <li key={index}>
-                                        <Link
-                                          to={item.href}
-                                          className="text-sm text-gray-900 hover:text-accent transition-colors"
-                                        >
-                                          {item.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               ))}
             </nav>
@@ -312,16 +107,40 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Right Side - Menu Button */}
+            {/* Right Side - Navigation and Menu */}
             <div className="flex items-center ml-auto">
+              <nav className="hidden md:flex items-center space-x-6 mr-4">
+                <div className="relative">
+                  <Link
+                    to="/about"
+                    className="text-sm font-bold text-accent transition-colors uppercase tracking-wider relative group"
+                  >
+                    About
+                  </Link>
+                </div>
+                <div className="relative">
+                  <Link
+                    to="/help"
+                    className="text-sm font-bold text-accent transition-colors uppercase tracking-wider relative group"
+                  >
+                    Help
+                  </Link>
+                </div>
+                <div className="relative">
+                  <Link
+                    to="/contact"
+                    className="text-sm font-bold text-accent transition-colors uppercase tracking-wider relative group"
+                  >
+                    Contact
+                  </Link>
+                </div>
+              </nav>
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="p-2 group relative"
+                className="p-2 -mr-2"
                 aria-label="Menu"
               >
-                <div className="relative w-6 h-5">
-                  <RiMenu3Line size={30} className="text-accent font-bold" />
-                </div>
+                <RiMenu3Line size={30} className="text-accent" />
               </button>
             </div>
           </div>
