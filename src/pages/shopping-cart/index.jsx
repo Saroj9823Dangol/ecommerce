@@ -234,7 +234,7 @@ const ShoppingCart = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh] pt-[4rem]">
+        <div className="flex items-center justify-center min-h-[60vh] pt-[6rem]">
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
             <span className="text-muted-foreground">Loading your cart...</span>
@@ -247,7 +247,7 @@ const ShoppingCart = () => {
   return (
     <div className="min-h-screen bg-background font-coder">
       <Header />
-      <main className="container mx-auto px-4 py-8 pt-[4rem]">
+      <main className="container mx-auto px-4 py-8 pt-[6rem]">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
           <Link

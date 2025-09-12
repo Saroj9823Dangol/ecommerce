@@ -113,11 +113,6 @@ const ProductImageGallery = ({ images, productName }) => {
           </button>
         ))}
       </div>
-      {/* 360 View Button */}
-      <button className="w-full py-3 border border-border rounded-md hover:bg-secondary transition-colors duration-200 flex items-center justify-center space-x-2">
-        <Icon name="RotateCcw" size={18} />
-        <span className="font-coder font-medium text-sm">360° View</span>
-      </button>
     </div>
   );
 };

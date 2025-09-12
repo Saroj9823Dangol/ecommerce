@@ -13,10 +13,10 @@ const ProductGrid = ({
   if (loading) {
     return (
       <div
-        className={`grid gap-6 ${
+        className={`${
           viewMode === "grid"
-            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            : "grid-cols-1"
+            ? "columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 [&>*]:break-inside-avoid"
+            : "flex flex-col space-y-4"
         }`}
       >
         {Array.from({ length: 12 })?.map((_, index) => (
@@ -74,22 +74,27 @@ const ProductGrid = ({
 
   return (
     <div
-      className={`grid gap-6 ${
+      className={`${
         viewMode === "grid"
-          ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          : "grid-cols-1"
+          ? "columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 [&>*]:break-inside-avoid"
+          : "flex flex-col space-y-4"
       }`}
     >
       {products?.map((product) => (
-        <ProductCard
+        <div
           key={product?.id}
-          product={product}
-          viewMode={viewMode}
-          onAddToCart={onAddToCart}
-          onToggleWishlist={onToggleWishlist}
-          onToggleCompare={onToggleCompare}
-          onQuickView={onQuickView}
-        />
+          className={viewMode === "grid" ? "mb-6" : "w-full"}
+        >
+          <ProductCard
+            product={product}
+            viewMode={viewMode}
+            onAddToCart={onAddToCart}
+            onToggleWishlist={onToggleWishlist}
+            onToggleCompare={onToggleCompare}
+            onQuickView={onQuickView}
+            className={viewMode === "list" ? "w-full" : ""}
+          />
+        </div>
       ))}
     </div>
   );

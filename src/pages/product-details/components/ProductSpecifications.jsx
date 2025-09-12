@@ -18,7 +18,7 @@ const ProductSpecifications = ({
     <div className="bg-card border border-border rounded-lg">
       {/* Tab Navigation */}
       <div className="border-b border-border">
-        <div className="flex">
+        <div className="flex overflow-x-auto">
           {tabs?.map((tab) => (
             <button
               key={tab?.id}

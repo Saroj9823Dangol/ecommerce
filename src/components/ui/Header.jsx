@@ -87,7 +87,7 @@ const Header = () => {
         <div className="relative container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Left Side - Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8">
               {navigationItems.map((category) => (
                 <div key={category} className="category-nav relative">
                   <Link

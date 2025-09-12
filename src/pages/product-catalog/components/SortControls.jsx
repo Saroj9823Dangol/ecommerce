@@ -27,7 +27,7 @@ const SortControls = ({
     <div className="bg-card border border-border rounded-lg p-4 mb-6 font-coder">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
         {/* Left Side - Results Count and Filter Toggle */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <Button
             variant="outline"
             onClick={onFilterToggle}
@@ -48,9 +48,9 @@ const SortControls = ({
         </div>
 
         {/* Right Side - Sort and View Controls */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
           {/* Sort Dropdown */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-coder font-medium text-foreground whitespace-nowrap">
               Sort by:
             </span>
@@ -58,7 +58,6 @@ const SortControls = ({
               options={sortOptions}
               value={sortBy}
               onChange={onSortChange}
-              className="min-w-[180px]"
             />
           </div>
 

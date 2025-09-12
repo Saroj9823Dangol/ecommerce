@@ -91,13 +91,13 @@ const ProductCard = ({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="flex space-x-4">
+        <div className="flex gap-4 flex-wrap">
           {/* Product Image */}
-          <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-md bg-secondary">
+          <div className="relative overflow-hidden rounded-md">
             <Image
               src={product?.image}
               alt={product?.name}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              className=" w-32 aspect-square object-cover transition-transform duration-300 hover:scale-105"
             />
             {product?.isNew && (
               <span className="absolute top-2 left-2 bg-accent text-accent-foreground text-xs font-medium px-2 py-1 rounded">
@@ -112,10 +112,10 @@ const ProductCard = ({
           </div>
 
           {/* Product Details */}
-          <div className="flex-1 min-w-0 font-coder">
+          <div className="flex-1 font-coder">
             <div className="flex items-start justify-between mb-2">
               <div>
-                <h3 className="font-semibold text-lg text-foreground truncate">
+                <h3 className="font-semibold text-lg text-foreground">
                   {product?.name}
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -163,7 +163,7 @@ const ProductCard = ({
               {product?.description}
             </p>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap">
               <div className="flex items-center space-x-2">
                 {product?.originalPrice && (
                   <span className="text-sm text-muted-foreground line-through">
@@ -175,8 +175,8 @@ const ProductCard = ({
                 </span>
               </div>
 
-              <div className="flex items-center space-x-2 font-coder">
-                <Button variant="outline" size="sm" onClick={handleQuickView}>
+              <div className="flex items-center font-coder flex-wrap gap-2">
+                <Button size="sm" onClick={handleQuickView}>
                   Quick View
                 </Button>
                 <Button

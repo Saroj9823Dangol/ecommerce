@@ -82,7 +82,7 @@ const CheckoutProcess = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="pt-[4rem]">
+        <div className="pt-[6rem]">
           <OrderConfirmation orderData={orderData} />
         </div>
       </div>
@@ -93,7 +93,7 @@ const CheckoutProcess = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <div className="pt-[4rem]">
+      <div className="pt-[6rem]">
         {/* Progress Indicator */}
         <CheckoutProgress
           currentStep={currentStep}
