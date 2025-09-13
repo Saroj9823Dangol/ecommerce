@@ -1,7 +1,284 @@
 import { useEffect, useRef, useState } from "react";
-import { RiMenu3Line } from "react-icons/ri";
+import { RiMenu3Line, RiArrowDownSLine } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "../AppIcon";
+
+const navigationCategories = {
+  Home: {
+    "New Arrivals": [
+      "Shoes",
+      "Clothing",
+      "Accessories",
+      "Sportswear",
+      "Collaborations",
+    ],
+    "Best Sellers": [
+      "Ultraboost 23",
+      "Samba OG",
+      "Gazelle",
+      "Stan Smith",
+      "NMD V3",
+    ],
+    "Member Access": [
+      "Exclusive Drops",
+      "Early Access",
+      "Member Rewards",
+      "Personalized Picks",
+      "Limited Editions",
+    ],
+    Sale: [
+      "Up to 30% Off",
+      "Outlet Specials",
+      "Last Chance",
+      "Seasonal Clearance",
+      "Bundles & Sets",
+    ],
+    "Featured Collections": [
+      "Ultraboost",
+      "NMD",
+      "Stan Smith",
+      "Gazelle",
+      "Superstar",
+      "Samba",
+      "Campus",
+      "Forum",
+      "Ozweego",
+      "ZX",
+    ],
+  },
+  Men: {
+    "New & Featured": [
+      "New Arrivals",
+      "Best Sellers",
+      "Member Access",
+      "Summer Essentials",
+      "Sale",
+      "Back to Sport",
+      "Limited Editions",
+      "adidas x Gucci",
+      "adidas x IVY PARK",
+    ],
+    Shoes: [
+      "All Shoes",
+      "Lifestyle",
+      "Running",
+      "Basketball",
+      "Soccer",
+      "Training & Gym",
+      "Tennis",
+      "Golf",
+      "Hiking",
+      "Sandals & Slides",
+      "Trail Running",
+      "Skateboarding",
+      "Outdoor",
+      "Slippers",
+      "Luxury",
+    ],
+    Clothing: [
+      "T-Shirts",
+      "Shorts",
+      "Hoodies & Sweatshirts",
+      "Pants",
+      "Jackets",
+      "Tracksuits",
+      "Socks",
+      "Underwear & Basics",
+      "Swimwear",
+      "Jerseys & Kits",
+      "Tights & Leggings",
+      "Shirts & Polos",
+      "Vests",
+      "Thermal & Base Layers",
+      "Luxury",
+    ],
+    Accessories: [
+      "Bags & Backpacks",
+      "Hats & Headwear",
+      "Socks",
+      "Gloves",
+      "Sunglasses",
+      "Watches",
+      "Water Bottles",
+      "Yoga Mats",
+      "Gym Bags",
+      "Duffel Bags",
+      "Wallets & Card Holders",
+      "Belts",
+      "Ties & Pocket Squares",
+      "Beanies & Winter Hats",
+      "Face Covers",
+    ],
+    Sports: [
+      "Soccer",
+      "Running",
+      "Basketball",
+      "Tennis",
+      "Golf",
+      "Training",
+      "Outdoor",
+      "Swimming",
+      "Cycling",
+      "Skateboarding",
+      "Baseball",
+      "Football",
+      "Hockey",
+      "Rugby",
+      "Cricket",
+    ],
+  },
+  Women: {
+    "New & Featured": [
+      "New Arrivals",
+      "Best Sellers",
+      "Member Access",
+      "Summer Styles",
+      "Sale",
+      "Workout Essentials",
+      "Limited Editions",
+      "adidas x Gucci",
+      "adidas x IVY PARK",
+    ],
+    Shoes: [
+      "All Shoes",
+      "Lifestyle",
+      "Running",
+      "Training & Gym",
+      "Tennis",
+      "Golf",
+      "Hiking",
+      "Sandals & Slides",
+      "Trail Running",
+      "Skateboarding",
+      "Outdoor",
+      "Slippers",
+      "Luxury",
+    ],
+    Clothing: [
+      "T-Shirts & Tops",
+      "Shorts",
+      "Hoodies & Sweatshirts",
+      "Leggings",
+      "Sports Bras",
+      "Jackets",
+      "Joggers & Pants",
+      "Dresses & Skirts",
+      "Swimwear",
+      "Socks",
+      "Tracksuits",
+      "Tights",
+      "Tank Tops",
+      "Thermal & Base Layers",
+      "Luxury",
+    ],
+    Accessories: [
+      "Bags & Backpacks",
+      "Hats & Headwear",
+      "Socks",
+      "Yoga Mats",
+      "Water Bottles",
+      "Sunglasses",
+      "Watches",
+      "Gym Bags",
+      "Duffel Bags",
+      "Hair Accessories",
+      "Gloves & Scarves",
+      "Beanies & Winter Hats",
+      "Face Covers",
+      "Yoga Accessories",
+      "Sports Bras",
+    ],
+    Sports: [
+      "Running",
+      "Training",
+      "Yoga",
+      "Tennis",
+      "Golf",
+      "Swimming",
+      "Outdoor",
+      "Cycling",
+      "Soccer",
+      "Basketball",
+      "Volleyball",
+      "Dance",
+      "Pilates",
+      "HIIT",
+      "Barre",
+    ],
+  },
+  Kids: {
+    "New & Featured": [
+      "New Arrivals",
+      "Best Sellers",
+      "Back to School",
+      "Sale",
+      "Member Access",
+      "Seasonal Favorites",
+      "Matching Family Styles",
+      "Character Shop",
+    ],
+    "Boys (4-14)": [
+      "Shoes",
+      "Clothing",
+      "Accessories",
+      "Soccer",
+      "Basketball",
+      "Running",
+      "Sandals",
+      "Slippers",
+      "School Essentials",
+      "Character Styles",
+    ],
+    "Girls (4-14)": [
+      "Shoes",
+      "Clothing",
+      "Accessories",
+      "Soccer",
+      "Running",
+      "Dance",
+      "Sandals",
+      "Slippers",
+      "School Essentials",
+      "Character Styles",
+    ],
+    "Toddlers (1-4)": [
+      "Shoes",
+      "Clothing",
+      "Accessories",
+      "Soccer",
+      "Running",
+      "Sandals",
+      "Slippers",
+      "Character Styles",
+      "Playtime Favorites",
+      "Matching Family Styles",
+    ],
+    "Baby (0-12 mos)": [
+      "Shoes",
+      "Clothing",
+      "Accessories",
+      "Gifts",
+      "Onesies & Bodysuits",
+      "Pajamas",
+      "Socks & Booties",
+      "Hats & Headwear",
+      "Character Styles",
+      "Matching Family Styles",
+    ],
+    Accessories: [
+      "Socks",
+      "Bags & Backpacks",
+      "Hats & Headwear",
+      "Water Bottles",
+      "Balls",
+      "Sports Equipment",
+      "Lunch Boxes",
+      "Hair Accessories",
+      "Gloves & Scarves",
+      "Swim Accessories",
+    ],
+  },
+};
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -13,10 +290,24 @@ const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(3);
   const [wishlistCount, setWishlistCount] = useState(5);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const dropdownRef = useRef(null);
 
   const location = useLocation();
 
-  const navigationItems = ["Men", "Women", "Kids", "Home"];
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setActiveCategory(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const mockSuggestions = [
     "Ultraboost 22",
@@ -88,16 +379,175 @@ const Header = () => {
           <div className="flex items-center justify-between h-16">
             {/* Left Side - Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              {navigationItems.map((category) => (
-                <div key={category} className="category-nav relative">
-                  <Link
-                    to={`/${category.toLowerCase()}`}
-                    className="text-sm font-bold text-accent transition-colors uppercase tracking-wider relative group"
+              {Object.entries(navigationCategories).map(
+                ([category, subcategories]) => (
+                  <div
+                    key={category}
+                    className="relative group"
+                    onMouseEnter={() => setActiveCategory(category)}
+                    onMouseLeave={() => setActiveCategory(null)}
                   >
-                    {category}
-                  </Link>
-                </div>
-              ))}
+                    <div className="flex items-center cursor-pointer py-2 group/nav-item">
+                      <div className="relative">
+                        <span className="text-sm font-bold text-accent uppercase tracking-wider hover:text-accent/80 transition-colors">
+                          {category}
+                        </span>
+                        <span
+                          className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
+                            activeCategory === category
+                              ? "w-full"
+                              : "w-0 group-hover/nav-item:w-full"
+                          }`}
+                        ></span>
+                      </div>
+                    </div>
+
+                    {/* Mega Menu */}
+                    {activeCategory === category && (
+                      <div className="fixed left-0 right-0 backdrop-blur-xl bg-white shadow-xl z-50 border-t border-gray-100 animate-fadeIn font-coder overflow-hidden">
+                        <div className="container mx-auto px-6 py-6">
+                          <div className="grid grid-cols-5 gap-8 max-h-[70vh] overflow-y-auto pr-4 custom-scrollbar">
+                            {Object.entries(subcategories).map(
+                              ([subcategory, items]) => (
+                                <div key={subcategory} className="group">
+                                  <h4 className="font-bold text-sm text-gray-900 uppercase tracking-wider mb-4 pb-2 border-b border-gray-100 group-hover:text-accent transition-colors duration-200">
+                                    {subcategory}
+                                  </h4>
+                                  <ul className="space-y-3 mt-2">
+                                    {items.map((item) => (
+                                      <li
+                                        key={item}
+                                        className="transform hover:translate-x-1 transition-transform duration-200"
+                                      >
+                                        <Link
+                                          to={`/${category.toLowerCase()}/${item
+                                            .toLowerCase()
+                                            .replace(/\s+/g, "-")}`}
+                                          className="text-sm text-gray-600 hover:text-accent transition-colors duration-200 flex items-center group/item"
+                                        >
+                                          <span className="w-1.5 h-1.5 bg-accent opacity-0 group-hover/item:opacity-100 rounded-full mr-2 transition-all duration-200"></span>
+                                          {item}
+                                          {item === "New Arrivals" && (
+                                            <span className="ml-2 px-1.5 py-0.5 bg-accent text-white text-xs rounded-full">
+                                              New
+                                            </span>
+                                          )}
+                                          {item === "Sale" && (
+                                            <span className="ml-2 px-1.5 py-0.5 bg-red-500 text-white text-xs rounded-full">
+                                              Sale
+                                            </span>
+                                          )}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )
+                            )}
+
+                            {/* Featured Banner */}
+                            {category === "Men" && (
+                              <div className="relative rounded-lg overflow-hidden col-span-2 row-span-2 group">
+                                <img
+                                  src="/assets/images/men-featured.jpg"
+                                  alt="Men's Collection"
+                                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                                  <span className="text-xs text-white/80 mb-1">
+                                    NEW COLLECTION
+                                  </span>
+                                  <h3 className="text-2xl font-bold text-white mb-2">
+                                    Summer '24
+                                  </h3>
+                                  <p className="text-sm text-white/90 mb-4">
+                                    Discover the latest styles for the season
+                                  </p>
+                                  <button className="bg-white text-accent text-sm font-medium px-4 py-2 rounded-full w-fit hover:bg-gray-100 transition-colors">
+                                    Shop Now
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+
+                            {category === "Women" && (
+                              <div className="relative rounded-lg overflow-hidden col-span-2 row-span-2 group">
+                                <img
+                                  src="/assets/images/women-featured.jpg"
+                                  alt="Women's Collection"
+                                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                                  <span className="text-xs text-white/80 mb-1">
+                                    FEATURED
+                                  </span>
+                                  <h3 className="text-2xl font-bold text-white mb-2">
+                                    Activewear
+                                  </h3>
+                                  <p className="text-sm text-white/90 mb-4">
+                                    Performance meets style
+                                  </p>
+                                  <button className="bg-white text-accent text-sm font-medium px-4 py-2 rounded-full w-fit hover:bg-gray-100 transition-colors">
+                                    Explore
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Bottom Banner */}
+                          <div className="mt-8 pt-6 border-t border-gray-100">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-6">
+                                <a
+                                  href="#"
+                                  className="text-sm font-medium text-gray-700 hover:text-accent flex items-center"
+                                >
+                                  <Icon
+                                    name="Star"
+                                    size={16}
+                                    className="mr-2"
+                                  />
+                                  New Arrivals
+                                </a>
+                                <a
+                                  href="#"
+                                  className="text-sm font-medium text-gray-700 hover:text-accent flex items-center"
+                                >
+                                  <Icon name="Tag" size={16} className="mr-2" />
+                                  Best Sellers
+                                </a>
+                                <a
+                                  href="#"
+                                  className="text-sm font-medium text-gray-700 hover:text-accent flex items-center"
+                                >
+                                  <Icon
+                                    name="Percent"
+                                    size={16}
+                                    className="mr-2"
+                                  />
+                                  Sale
+                                </a>
+                              </div>
+                              <a
+                                href="#"
+                                className="text-sm font-medium text-accent hover:underline flex items-center"
+                              >
+                                View All {category}
+                                <Icon
+                                  name="ArrowRight"
+                                  size={16}
+                                  className="ml-1"
+                                />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
             </nav>
 
             {/* Center - Logo */}
