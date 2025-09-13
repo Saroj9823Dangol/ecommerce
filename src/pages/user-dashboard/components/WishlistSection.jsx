@@ -304,7 +304,7 @@ const WishlistSection = () => {
                   <div className="space-y-2 font-coder">
                     {item?.inStock ? (
                       <>
-                        <Button
+                        {/* <Button
                           size="sm"
                           className="w-full"
                           onClick={() => handleMoveToCart(item?.id)}
@@ -315,7 +315,7 @@ const WishlistSection = () => {
                             className="mr-2"
                           />
                           Add to Cart
-                        </Button>
+                        </Button> */}
                         <Button
                           variant="outline"
                           size="sm"

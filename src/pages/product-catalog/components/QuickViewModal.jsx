@@ -89,12 +89,12 @@ const QuickViewModal = ({
       >
         {/* Modal */}
         <div
-          className="bg-card rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-card max-w-4xl w-full max-h-[70vh] rounded-xl overflow-y-auto"
           onClick={(e) => e?.stopPropagation()}
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <h2 className="font-monument font-semibold text-xl text-foreground">
+            <h2 className=" font-semibold text-xl text-foreground">
               Quick View
             </h2>
             <button
@@ -185,7 +185,7 @@ const QuickViewModal = ({
               {/* Product Details */}
               <div className="space-y-6">
                 <div>
-                  <h1 className="font-monument font-bold text-2xl text-foreground mb-2">
+                  <h1 className=" font-bold text-2xl text-foreground mb-2">
                     {product?.name}
                   </h1>
                   <p className="text-muted-foreground">{product?.category}</p>
@@ -208,7 +208,7 @@ const QuickViewModal = ({
                       ${product?.originalPrice}
                     </span>
                   )}
-                  <span className="font-monument font-bold text-3xl text-foreground">
+                  <span className=" font-bold text-3xl text-foreground">
                     ${product?.price}
                   </span>
                   {product?.discount && (

@@ -179,13 +179,13 @@ const ProductCard = ({
                 <Button size="sm" onClick={handleQuickView}>
                   Quick View
                 </Button>
-                <Button
+                {/* <Button
                   size="sm"
                   onClick={handleAddToCart}
                   disabled={product?.sizes?.length > 0 && !selectedSize}
                 >
                   Add to Cart
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
@@ -326,13 +326,13 @@ const ProductCard = ({
                 ${product?.originalPrice}
               </span>
             )}
-            <span className="font-monument font-bold text-lg text-foreground font-coder">
+            <span className="font-bold text-lg text-foreground font-coder">
               ${product?.price}
             </span>
           </div>
         </div>
 
-        <Button
+        {/* <Button
           fullWidth
           onClick={handleAddToCart}
           disabled={product?.sizes?.length > 0 && !selectedSize}
@@ -340,7 +340,7 @@ const ProductCard = ({
         >
           <Icon name="ShoppingCart" size={16} className="mr-2" />
           Add to Cart
-        </Button>
+        </Button> */}
       </div>
     </Link>
   );

@@ -174,12 +174,12 @@ const ProductCard = ({ product, variant = "default" }) => {
         )}
 
         {/* Action Buttons */}
-        <div className="space-y-2 font-coder">
+        {/* <div className="space-y-2 font-coder">
           <Button size="sm" className="w-full">
             <Icon name="ShoppingCart" size={16} className="mr-2" />
             Add to Cart
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

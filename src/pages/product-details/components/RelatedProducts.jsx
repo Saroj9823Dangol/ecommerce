@@ -183,7 +183,7 @@ const RelatedProducts = ({ products, title = "Related Products" }) => {
                     </div>
 
                     {/* Quick Add to Cart - Show on mobile, hide on desktop except on hover */}
-                    <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 sm:opacity-0 transition-opacity duration-200">
+                    {/* <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 sm:opacity-0 transition-opacity duration-200">
                       <Button
                         size="sm"
                         fullWidth
@@ -194,7 +194,7 @@ const RelatedProducts = ({ products, title = "Related Products" }) => {
                       >
                         Add to Cart
                       </Button>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Product Info */}
